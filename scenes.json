@@ -1,0 +1,17 @@
+[
+    {
+        "position": "0 1.5 -3",
+        "color": "#4CC3D9",
+        "targetPreset": "yavapai"
+    },
+    {
+        "position": "2 1.5 -3",
+        "color": "#FFC107",
+        "targetPreset": "goldmine"
+    },
+    {
+        "position": "-2 1.5 -3",
+        "color": "#F48FB1",
+        "targetPreset": "arches"
+    }
+]
