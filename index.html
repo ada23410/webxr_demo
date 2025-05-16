@@ -8,14 +8,16 @@
     <script src="https://unpkg.com/aframe-environment-component@1.3.1/dist/aframe-environment-component.min.js"></script>
 </head>
 <body>
+    <a-assets>
+        <img id="yourImage" src="./image/images.png">
+    </a-assets>
     <a-scene environment="preset: forest; shadow: true;">
       <!-- 小卡片：觸發展開 -->
       <a-plane id="triggerCard"
-               position="0 1.5 -3"
-               width="1.2" height="0.8"
-               color="#4CC3D9"
-               class="clickable"
-               text="value: 點擊查看內容; align: center; color: white;">
+            position="0 1.5 -3"
+            width="1.2" height="0.8"
+            color="#4CC3D9"
+            class="clickable">
       </a-plane>
 
         <!-- 展開的大卡片 -->
@@ -24,20 +26,17 @@
             <a-plane id="dialogueBox"
                     visible="false"
                     position="0 1.5 -2.5"
-                    width="2.5" height="1.5"
-                    color="#FFFFFF"
-                    material="opacity: 0.95"
-                    text="value: 這是一張展開的卡片，可用來顯示更多內容；align: center; color: black;">
+                    width="2.5" height="2.5"
+                    material="src: #yourImage; opacity: 1;">
             </a-plane>
         
             <!-- 關閉按鈕 -->
             <a-plane id="closeButton"
                     visible="false"
                     class="clickable"
-                    position="0 0.6 -2.4"
+                    position="0 0.4 -2.4"
                     width="0.5" height="0.2"
-                    color="#FF6B6B"
-                    text="value: 關閉; align: center; color: white;">
+                    color="#FF6B6B">
             </a-plane>
         </a-entity>
 
@@ -62,14 +61,14 @@
             const closeButton = document.querySelector('#closeButton');
 
             triggerCard.addEventListener('click', () => {
-            console.log("小卡片被點擊了！");
-            dialogueBox.setAttribute('visible', true);
-            closeButton.setAttribute('visible', true);
+                console.log("小卡片被點擊了！");
+                dialogueBox.setAttribute('visible', true);
+                closeButton.setAttribute('visible', true);
             });
 
             closeButton.addEventListener('click', () => {
-            dialogueBox.setAttribute('visible', false);
-            closeButton.setAttribute('visible', false);
+                dialogueBox.setAttribute('visible', false);
+                closeButton.setAttribute('visible', false);
             });
         });
     </script>
