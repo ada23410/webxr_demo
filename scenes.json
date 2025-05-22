@@ -2,16 +2,28 @@
     {
         "position": "0 1.5 -3",
         "color": "#4CC3D9",
-        "targetPreset": "yavapai"
+        "img": "image/door.png",
+        "width": "3.0",
+        "height": "2.5",
+        "targetPreset": "yavapai",
+        "skyImg": "#img-yavapai"
     },
     {
         "position": "2 1.5 -3",
         "color": "#FFC107",
-        "targetPreset": "goldmine"
+        "img": "image/door.png",
+        "width": "1.2",
+        "height": "0.8",
+        "targetPreset": "goldmine",
+        "skyImg": "#img-goldmine"
     },
     {
         "position": "-2 1.5 -3",
         "color": "#F48FB1",
-        "targetPreset": "arches"
+        "img": "image/door.png",
+        "width": "1.2",
+        "height": "0.8",
+        "targetPreset": "arches",
+        "skyImg": "#img-arches"
     }
 ]
