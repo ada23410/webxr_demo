@@ -21,7 +21,7 @@
     "description": "The Great Wall is a monumental defensive structure of ancient China, stretching thousands of miles and incorporating walls, passes, and beacons. It reflects military ingenuity and rich historical value.",
     "img": "image/door.png",
     "skyImg": "#img-greatwall",
-    "video": "https://www.youtube.com/watch?v=J-DWvXJlZuU"
+    "video": "#vid-greatwall"
   },
   {
     "targetPreset": "petra",
@@ -33,7 +33,7 @@
     "description": "Petra is an ancient rock-carved city built by the Nabataeans. It blends diverse cultural influences with stunning natural surroundings, featuring temples, tombs, and a grand theater.",
     "img": "image/door.png",
     "skyImg": "#img-petra",
-    "video": "https://youtu.be/Ja110qpd0wU?si=Cx8c1TNhtR7shjtH"
+    "video": "#vid-petra"
   },
   {
     "targetPreset": "christstatue",

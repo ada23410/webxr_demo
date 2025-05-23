@@ -106,7 +106,7 @@ document.addEventListener('DOMContentLoaded', () => {
   
   function buildSceneInfo(sceneData) {
     const infoCard = document.createElement('a-entity');
-    infoCard.setAttribute('position', '-1.8 0.8 -3'); // 整體區塊位置
+    infoCard.setAttribute('position', '-1.8 0.8 -3');
   
     // 背景板
     const background = document.createElement('a-rounded');
@@ -114,42 +114,83 @@ document.addEventListener('DOMContentLoaded', () => {
     background.setAttribute('height', 2.5);
     background.setAttribute('color', 'black');
     background.setAttribute('opacity', 0.5);
-    background.setAttribute('radius', 0.2);  
+    background.setAttribute('radius', 0.2);
     background.setAttribute('position', '2.75 1.25 0');
     infoCard.appendChild(background);
   
-    // 標題（左下角）
+    // 標題
     const titleEl = document.createElement('a-text');
     titleEl.setAttribute('value', sceneData.title || '');
     titleEl.setAttribute('align', 'left');
     titleEl.setAttribute('color', 'white');
     titleEl.setAttribute('width', 4);
-    titleEl.setAttribute('position', '0.2 2.0 0'); // 接近背景左上角
+    titleEl.setAttribute('position', '0.2 2.0 0');
     infoCard.appendChild(titleEl);
   
-    // 說明文字（對齊標題左邊）
+    // 說明
     const descEl = document.createElement('a-text');
     descEl.setAttribute('value', sceneData.description || '');
     descEl.setAttribute('align', 'left');
     descEl.setAttribute('color', '#fff');
     descEl.setAttribute('width', 2.5);
-    descEl.setAttribute('baseline', 'top'); // 讓文字從上方開始對齊
-    descEl.setAttribute('line-height', 50); // 或自定義分段 + 多元素
+    descEl.setAttribute('baseline', 'top');
+    descEl.setAttribute('line-height', 50);
     descEl.setAttribute('wrap-count', 35);
-    descEl.setAttribute('position', '0.2 1.3 0'); // 接近左側往下
+    descEl.setAttribute('position', '0.2 1.3 0');
     infoCard.appendChild(descEl);
   
-    // 影片（放在右側）
+    // 影片元件
     const videoEl = document.createElement('a-video');
-    videoEl.setAttribute('src', sceneData.video);
+    videoEl.setAttribute('src', sceneData.video); // '#vid-colosseum'
     videoEl.setAttribute('width', 2.5);
     videoEl.setAttribute('height', 1.5);
-    videoEl.setAttribute('position', '4 1.2 0.01'); // 稍微往前避免被文字擋住
-    videoEl.setAttribute('autoplay', true);
+    videoEl.setAttribute('position', '4 1.2 0.01');
+    videoEl.setAttribute('autoplay', false);
     videoEl.setAttribute('muted', true);
     videoEl.setAttribute('loop', true);
+    videoEl.setAttribute('id', 'info-video');
+    videoEl.setAttribute('playsinline', true);
+    videoEl.setAttribute('class', 'clickable');
     infoCard.appendChild(videoEl);
   
+    // 播放按鈕
+    const playBtn = document.createElement('a-circle');
+    playBtn.setAttribute('radius', 0.35);
+    playBtn.setAttribute('color', '#222');
+    playBtn.setAttribute('opacity', '0.7');
+    playBtn.setAttribute('position', '4 1.2 0.02');
+    playBtn.setAttribute('class', 'clickable');
+  
+    const playText = document.createElement('a-text');
+    playText.setAttribute('value', 'play');
+    playText.setAttribute('align', 'center');
+    playText.setAttribute('color', 'white');
+    playText.setAttribute('width', 1.5);
+    playText.setAttribute('position', '0 0 0.01');
+    playBtn.appendChild(playText);
+  
+    // 點擊播放
+    playBtn.addEventListener('click', () => {
+      const nativeVideo = document.querySelector(sceneData.video);
+      if (nativeVideo) {
+        nativeVideo.play().then(() => {
+          playBtn.setAttribute('visible', 'false');
+        }).catch(err => {
+          console.warn('播放失敗：', err);
+        });
+      }
+    });
+  
+    infoCard.appendChild(playBtn);
     doorContainer.appendChild(infoCard);
+  
+    // 進入/離開影片播放控制
+    setTimeout(() => {
+      const nativeVideo = document.querySelector(sceneData.video);
+      if (!nativeVideo) return;
+  
+      videoEl.addEventListener('mouseenter', () => nativeVideo.play());
+      videoEl.addEventListener('mouseleave', () => nativeVideo.pause());
+    }, 500);
   }  
 });
