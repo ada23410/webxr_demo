@@ -1,23 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Webxr Multi-Scene</title>
-  <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
-  <script src="https://unpkg.com/aframe-environment-component@1.3.1/dist/aframe-environment-component.min.js"></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Webxr Multi-Scene</title>
+    <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/aframe-rounded@1.0.1/aframe-rounded.min.js"></script>
+    <script src="https://unpkg.com/aframe-environment-component@1.3.1/dist/aframe-environment-component.min.js"></script>
 </head>
 <body>
     <a-scene id="mainScene">
         <a-assets>
+            <!-- <img id="bg-panel" src="image/realistic-rolled-parchment-paper-isolated.png"> -->
+            <!-- 圖片資源 -->
             <img id="img-forest" src="image/360/sky.jpg">
-            <img id="img-goldmine" src="https://live.staticflickr.com/65535/54231650240_eff404aa25_k.jpg">
-            <img id="img-arches" src="https://live.staticflickr.com/65535/54509611588_c738ebd94c_k.jpg">
-            <img id="img-yavapai" src="https://live.staticflickr.com/65535/54231245931_7679f9883f_k.jpg">
+            <img id="img-colosseum" src="https://live.staticflickr.com/65535/54231650240_eff404aa25_k.jpg">
+            <img id="img-greatwall" src="https://live.staticflickr.com/65535/54509611588_c738ebd94c_k.jpg">
+            <img id="img-petra" src="https://live.staticflickr.com/65535/54231245931_7679f9883f_k.jpg">
+            <img id="img-christstatue" src="https://live.staticflickr.com/65535/54231245931_7679f9883f_k.jpg">
+            <img id="img-machupicchu" src="https://live.staticflickr.com/65535/54231245931_7679f9883f_k.jpg">
+            <img id="img-chichenitza" src="https://live.staticflickr.com/65535/54231245931_7679f9883f_k.jpg">
+            <img id="img-tajmahal" src="https://live.staticflickr.com/65535/54231245931_7679f9883f_k.jpg">
+            <!-- 影片資源 -->
+            <video id="vid-colosseum" src="video/Inside the Colosseum - Rome's Most Iconic Landmark.mp4" autoplay loop crossorigin="anonymous"></video>
         </a-assets>
         
         <a-sky id="sky" src="#img-forest" rotation="0 -90 0"></a-sky>
-        
         <a-entity id="doorContainer"></a-entity>
 
         <!-- 光源與地板 -->

@@ -1,29 +1,86 @@
 [
-    {
-        "position": "0 1.5 -3",
-        "color": "#4CC3D9",
-        "img": "image/door.png",
-        "width": "3.0",
-        "height": "2.5",
-        "targetPreset": "yavapai",
-        "skyImg": "#img-yavapai"
-    },
-    {
-        "position": "2 1.5 -3",
-        "color": "#FFC107",
-        "img": "image/door.png",
-        "width": "1.2",
-        "height": "0.8",
-        "targetPreset": "goldmine",
-        "skyImg": "#img-goldmine"
-    },
-    {
-        "position": "-2 1.5 -3",
-        "color": "#F48FB1",
-        "img": "image/door.png",
-        "width": "1.2",
-        "height": "0.8",
-        "targetPreset": "arches",
-        "skyImg": "#img-arches"
-    }
+  {
+    "targetPreset": "colosseum",
+    "position": "-4 1.0 -2",
+    "color": "#FF6B6B",
+    "width": "2.4",
+    "height": "1.6",
+    "title": "Colosseum , Italy",
+    "description": "The Colosseum was the largest amphitheater in ancient Rome, accommodating up to 80,000 spectators. It exemplifies architectural excellence and social stratification, symbolizing entertainment and political control.",
+    "img": "image/door.png",
+    "skyImg": "#img-colosseum",
+    "video": "#vid-colosseum"
+  },
+  {
+    "targetPreset": "greatwall",
+    "position": "-3 1.1 -3",
+    "color": "#FFD93D",
+    "width": "2.2",
+    "height": "1.4",
+    "title": "Great Wall (China)",
+    "description": "The Great Wall is a monumental defensive structure of ancient China, stretching thousands of miles and incorporating walls, passes, and beacons. It reflects military ingenuity and rich historical value.",
+    "img": "image/door.png",
+    "skyImg": "#img-greatwall",
+    "video": "https://www.youtube.com/watch?v=J-DWvXJlZuU"
+  },
+  {
+    "targetPreset": "petra",
+    "position": "-2 1.8 -3",
+    "color": "#6BCB77",
+    "width": "1.9",
+    "height": "1.3",
+    "title": "Petra (Jordan)",
+    "description": "Petra is an ancient rock-carved city built by the Nabataeans. It blends diverse cultural influences with stunning natural surroundings, featuring temples, tombs, and a grand theater.",
+    "img": "image/door.png",
+    "skyImg": "#img-petra",
+    "video": "https://youtu.be/Ja110qpd0wU?si=Cx8c1TNhtR7shjtH"
+  },
+  {
+    "targetPreset": "christstatue",
+    "position": "-1 0.9 -3",
+    "color": "#4D96FF",
+    "width": "2.0",
+    "height": "1.5",
+    "title": "Christ the Redeemer (Brazil)",
+    "description": "Standing 38 meters tall atop Corcovado Mountain, the Christ statue represents love and acceptance. It is a national symbol of Brazil and one of the world’s new seven wonders.",
+    "img": "image/door.png",
+    "skyImg": "#img-christstatue",
+    "video": "https://youtu.be/k_615AauSds?si=sUjDYfD-C1Fmef7v"
+  },
+  {
+    "targetPreset": "machupicchu",
+    "position": "0 0.8 -3",
+    "color": "#845EC2",
+    "width": "2.6",
+    "height": "1.6",
+    "title": "Machu Picchu (Peru)",
+    "description": "Machu Picchu is an Incan royal estate located in the Andes at an altitude of 2,430 meters. Abandoned after the Spanish conquest, it features precise stonework and sacred structures.",
+    "img": "image/door.png",
+    "skyImg": "#img-machupicchu",
+    "video": "https://www.youtube.com/watch?v=cnMa-Sm9H4k"
+  },
+  {
+    "targetPreset": "chichenitza",
+    "position": "1 1.5 -3",
+    "color": "#00C9A7",
+    "width": "2.1",
+    "height": "1.4",
+    "title": "Chichen Itza (Mexico)",
+    "description": "Chichen Itza was a major Mayan city known for the Temple of Kukulcan. The site blends astronomy, religion, and politics, showcasing the Mayan civilization’s achievements.",
+    "img": "image/door.png",
+    "skyImg": "#img-chichenitza",
+    "video": "https://youtu.be/ZBkCKdHDaN0?si=uG-ZFrKcJSJ32OBF"
+  },
+  {
+    "targetPreset": "tajmahal",
+    "position": "2 1.9 -3",
+    "color": "#F9C74F",
+    "width": "2.3",
+    "height": "1.5",
+    "title": "Taj Mahal (India)",
+    "description": "The Taj Mahal, located in Agra, India, was built by Mughal Emperor Shah Jahan in memory of his wife. Its white marble structure embodies love and eternal beauty.",
+    "img": "image/door.png",
+    "skyImg": "#img-tajmahal",
+    "video": "https://youtu.be/49HTIoCccDY?si=OIEDHsw6SQX9tdEu"
+  }
 ]
