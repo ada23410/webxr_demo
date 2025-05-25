@@ -45,7 +45,7 @@
     "description": "Standing 38 meters tall atop Corcovado Mountain, the Christ statue represents love and acceptance. It is a national symbol of Brazil and one of the world’s new seven wonders.",
     "img": "image/door.png",
     "skyImg": "#img-christstatue",
-    "video": "https://youtu.be/k_615AauSds?si=sUjDYfD-C1Fmef7v"
+    "video": "#vid-christstatue"
   },
   {
     "targetPreset": "machupicchu",
@@ -57,7 +57,7 @@
     "description": "Machu Picchu is an Incan royal estate located in the Andes at an altitude of 2,430 meters. Abandoned after the Spanish conquest, it features precise stonework and sacred structures.",
     "img": "image/door.png",
     "skyImg": "#img-machupicchu",
-    "video": "https://www.youtube.com/watch?v=cnMa-Sm9H4k"
+    "video": "#vid-machupicchu"
   },
   {
     "targetPreset": "chichenitza",
@@ -69,7 +69,7 @@
     "description": "Chichen Itza was a major Mayan city known for the Temple of Kukulcan. The site blends astronomy, religion, and politics, showcasing the Mayan civilization’s achievements.",
     "img": "image/door.png",
     "skyImg": "#img-chichenitza",
-    "video": "https://youtu.be/ZBkCKdHDaN0?si=uG-ZFrKcJSJ32OBF"
+    "video": "#vid-chichenitza"
   },
   {
     "targetPreset": "tajmahal",
@@ -81,6 +81,6 @@
     "description": "The Taj Mahal, located in Agra, India, was built by Mughal Emperor Shah Jahan in memory of his wife. Its white marble structure embodies love and eternal beauty.",
     "img": "image/door.png",
     "skyImg": "#img-tajmahal",
-    "video": "https://youtu.be/49HTIoCccDY?si=OIEDHsw6SQX9tdEu"
+    "video": "#vid-tajmahal"
   }
 ]
