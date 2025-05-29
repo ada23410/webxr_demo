@@ -7,20 +7,22 @@
     <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/aframe-rounded@1.0.1/aframe-rounded.min.js"></script>
     <script src="https://unpkg.com/aframe-environment-component@1.3.1/dist/aframe-environment-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-troika-text/dist/aframe-troika-text.min.js"></script>
 </head>
 <body>
     <a-scene id="mainScene">
         <a-assets>
-            <!-- <img id="bg-panel" src="image/realistic-rolled-parchment-paper-isolated.png"> -->
+            <a-asset-item id="img-door" src="image/door_with_frame.glb"></a-asset-item>
+            <img id="info-bg" src="image/background@2x.png">
             <!-- 圖片資源 -->
-            <img id="img-forest" src="image/360/sky.jpg">
-            <img id="img-colosseum" src="https://live.staticflickr.com/65535/54231650240_eff404aa25_k.jpg">
-            <img id="img-greatwall" src="https://live.staticflickr.com/65535/54509611588_c738ebd94c_k.jpg">
-            <img id="img-petra" src="https://live.staticflickr.com/65535/54231245931_7679f9883f_k.jpg">
-            <img id="img-christstatue" src="https://live.staticflickr.com/65535/54231245931_7679f9883f_k.jpg">
-            <img id="img-machupicchu" src="image/360/Machu_Picchu.jpg">
-            <img id="img-chichenitza" src="https://live.staticflickr.com/65535/54231245931_7679f9883f_k.jpg">
-            <img id="img-tajmahal" src="https://live.staticflickr.com/65535/54231245931_7679f9883f_k.jpg">
+            <img id="img-forest" src="image/360/sky.jpg" crossorigin="anonymous">
+            <img id="img-colosseum" src="https://live.staticflickr.com/975/40452472730_451970b325_5k.jpg" crossorigin="anonymous">
+            <img id="img-greatwall" src="https://live.staticflickr.com/7883/47437761662_7c6afb01c9_5k.jpg" crossorigin="anonymous">
+            <img id="img-petra" src="https://live.staticflickr.com/7833/47096473752_4a64a22d61_k.jpg" crossorigin="anonymous">
+            <img id="img-christstatue" src="image/360/Cristo_Redentor.jpg" crossorigin="anonymous">
+            <img id="img-machupicchu" src="image/360/Machu_Picchu.jpg" crossorigin="anonymous">
+            <img id="img-chichenitza" src="https://live.staticflickr.com/3083/2578304604_8753268597_b.jpg" crossorigin="anonymous">
+            <img id="img-tajmahal" src="https://live.staticflickr.com/4565/24412196648_16f4590ab5_b.jpg" crossorigin="anonymous">
             <!-- 影片資源 -->
             <video id="vid-colosseum" src="video/Colosseum.mp4" crossorigin="anonymous" playsinline></video>
             <video id="vid-greatwall" src="video/The Great Wall Of China.mp4" crossorigin="anonymous" playsinline></video>
@@ -37,7 +39,7 @@
         <!-- 光源與地板 -->
         <a-light type="ambient" color="#BBB"></a-light>
         <a-plane rotation="-90 0 0" width="10" height="10" color="#CEF2C3"></a-plane>
-  
+
         <!-- 相機與光標 -->
         <a-entity camera look-controls>
             <a-cursor fuse="false"

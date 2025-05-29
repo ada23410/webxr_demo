@@ -1,8 +1,12 @@
 let currentScene = 'forest';
 
 document.addEventListener('DOMContentLoaded', () => {
+  const assets = document.querySelector('a-assets');
   const doorContainer = document.querySelector('#doorContainer');
-  goToScene('forest');
+  assets.addEventListener('loaded', () => {
+    console.log('所有資源已載入，開始建立門卡！');
+    goToScene('forest');
+  });
   
   // 切換場景
   async function goToScene(preset) {
@@ -43,13 +47,13 @@ document.addEventListener('DOMContentLoaded', () => {
     //只建立 forest 場景中的門（排除 forest 本身）
     doors.forEach(door => {
       // 若這筆資料是某個 targetPreset 場景，就視為門卡
-        const doorEl = document.createElement('a-plane');
+        const doorEl = document.createElement('a-entity');
+        doorEl.setAttribute('gltf-model', door.model);
         doorEl.setAttribute('position', door.position);
-        doorEl.setAttribute('color', door.color);
-        doorEl.setAttribute('width', door.width);
-        doorEl.setAttribute('height', door.height);
+        doorEl.setAttribute('rotation', door.rotation || '90 0 0');
+        doorEl.setAttribute('scale', door.scale || '0.1 0.1 0.1');
+        doorEl.setAttribute('material', 'color: white; metalness: 0.3; roughness: 0.8');
         doorEl.setAttribute('class', 'clickable');
-        doorEl.setAttribute('material', `src: ${door.img}; shader: flat; transparent: true`);
   
         doorEl.addEventListener('click', () => {
           goToScene(door.targetPreset);
@@ -109,34 +113,39 @@ document.addEventListener('DOMContentLoaded', () => {
     infoCard.setAttribute('position', '-1.8 0.8 -3');
   
     // 背景板
-    const background = document.createElement('a-rounded');
-    background.setAttribute('width', 5.5);
-    background.setAttribute('height', 2.5);
-    background.setAttribute('color', 'black');
-    background.setAttribute('opacity', 0.5);
-    background.setAttribute('radius', 0.2);
-    background.setAttribute('position', '2.75 1.25 0');
+    const background = document.createElement('a-plane');
+    background.setAttribute('src', '#info-bg');
+    background.setAttribute('width', 8);
+    background.setAttribute('height', 3);
+    background.setAttribute('position', '1.8 1.3 -0.01'); 
+    background.setAttribute('opacity', '0.5'); 
+    background.setAttribute('material', 'transparent: true'); 
     infoCard.appendChild(background);
   
     // 標題
-    const titleEl = document.createElement('a-text');
+    const titleEl = document.createElement('a-troika-text');
     titleEl.setAttribute('value', sceneData.title || '');
-    titleEl.setAttribute('align', 'left');
     titleEl.setAttribute('color', 'white');
-    titleEl.setAttribute('width', 4);
-    titleEl.setAttribute('position', '0.2 2.0 0');
+    titleEl.setAttribute('fontSize', '0.42');
+    titleEl.setAttribute('font', 'assets/fonts/NotoSansTC-Bold.ttf'); // 使用粗體版本
+    titleEl.setAttribute('maxWidth', '3');
+    titleEl.setAttribute('align', 'center');
+    titleEl.setAttribute('position', '-0.4 2.1 0.01');
     infoCard.appendChild(titleEl);
+
   
     // 說明
-    const descEl = document.createElement('a-text');
+    const descEl = document.createElement('a-troika-text');
     descEl.setAttribute('value', sceneData.description || '');
-    descEl.setAttribute('align', 'left');
     descEl.setAttribute('color', '#fff');
-    descEl.setAttribute('width', 2.5);
-    descEl.setAttribute('baseline', 'top');
-    descEl.setAttribute('line-height', 50);
-    descEl.setAttribute('wrap-count', 35);
-    descEl.setAttribute('position', '0.2 1.3 0');
+    descEl.setAttribute('fontSize', '0.1');
+    descEl.setAttribute('font', 'assets/fonts/NotoSansTC-Regular.ttf'); // 普通版本
+    descEl.setAttribute('maxWidth', '2.8');
+    descEl.setAttribute('lineHeight', '1.4');
+    descEl.setAttribute('align', 'left');
+    descEl.setAttribute('whiteSpace', 'normal');
+    descEl.setAttribute('overflowWrap', 'break-word');
+    descEl.setAttribute('position', '0.4 1.2 0.01');
     infoCard.appendChild(descEl);
   
     // 影片元件
