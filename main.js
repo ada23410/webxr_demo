@@ -54,6 +54,18 @@ document.addEventListener('DOMContentLoaded', () => {
         doorEl.setAttribute('scale', door.scale || '0.1 0.1 0.1');
         doorEl.setAttribute('material', 'color: white; metalness: 0.3; roughness: 0.8');
         doorEl.setAttribute('class', 'clickable');
+
+        // 光標移入 → 放大
+        doorEl.setAttribute('event-set__enter', {
+          _event: 'mouseenter',
+          scale: '0.12 0.12 0.12'
+        });
+
+        // 光標離開 → 還原
+        doorEl.setAttribute('event-set__leave', {
+          _event: 'mouseleave',
+          scale: '0.1 0.1 0.1'
+        });
   
         doorEl.addEventListener('click', () => {
           goToScene(door.targetPreset);
@@ -115,9 +127,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // 背景板
     const background = document.createElement('a-plane');
     background.setAttribute('src', '#info-bg');
-    background.setAttribute('width', 8);
+    background.setAttribute('width', 7.5);
     background.setAttribute('height', 3);
-    background.setAttribute('position', '1.8 1.3 -0.01'); 
+    background.setAttribute('position', '2 1.3 -0.01'); 
     background.setAttribute('opacity', '0.5'); 
     background.setAttribute('material', 'transparent: true'); 
     infoCard.appendChild(background);
@@ -130,7 +142,7 @@ document.addEventListener('DOMContentLoaded', () => {
     titleEl.setAttribute('font', 'assets/fonts/NotoSansTC-Bold.ttf'); // 使用粗體版本
     titleEl.setAttribute('maxWidth', '3');
     titleEl.setAttribute('align', 'center');
-    titleEl.setAttribute('position', '-0.4 2.1 0.01');
+    titleEl.setAttribute('position', '-0.4 2.1 0.01')
     infoCard.appendChild(titleEl);
 
   
