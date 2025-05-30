@@ -44,43 +44,45 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // 建立切換場景的門
   async function buildDoors() {
-    // doorContainer.innerHTML = '';
-
     const res = await fetch('scenes.json');
     const doors = await res.json();
-
-    console.log('載入門卡數量：', doors.length);
   
-    //只建立 forest 場景中的門（排除 forest 本身）
     doors.forEach(door => {
-      // 若這筆資料是某個 targetPreset 場景，就視為門卡
-        const doorEl = document.createElement('a-entity');
-        doorEl.setAttribute('gltf-model', door.model);
-        doorEl.setAttribute('position', door.position);
-        doorEl.setAttribute('rotation', door.rotation || '90 0 0');
-        doorEl.setAttribute('scale', door.scale || '0.1 0.1 0.1');
-        doorEl.setAttribute('material', 'color: #888; roughness: 0.6; metalness: 0.1');
-        doorEl.setAttribute('class', 'clickable');
-
-        // 光標移入 → 放大 + 發亮
-        doorEl.setAttribute('event-set__enter', {
-          _event: 'mouseenter',
-          scale: '0.4 0.4 0.4'
-        });
-
-        // 光標離開 → 還原
-        doorEl.setAttribute('event-set__leave', {
-          _event: 'mouseleave',
-          scale: '0.3 0.3 0.3'
-        });
-          
-        doorEl.addEventListener('click', () => {
-          goToScene(door.targetPreset);
-        });
+      const doorEl = document.createElement('a-entity');
+      doorEl.setAttribute('gltf-model', door.model);
+      doorEl.setAttribute('position', door.position);
+      doorEl.setAttribute('rotation', door.rotation || '90 0 0');
+      doorEl.setAttribute('scale', door.scale || '0.3 0.3 0.3');
+      doorEl.setAttribute('material', 'color: #888; roughness: 0.6; metalness: 0.1');
+      doorEl.setAttribute('class', 'clickable');
   
-        doorContainer.appendChild(doorEl);
+      // 每個門專屬的 Label 圖片（初始隱藏） ===
+      const labelImg = document.createElement('a-image');
+      labelImg.setAttribute('src', door.labelImg || '#door-label-default');
+      labelImg.setAttribute('position', '0 2.5 0.3');
+      labelImg.setAttribute('scale', '3 1 1');
+      labelImg.setAttribute('visible', 'false');
+      doorEl.appendChild(labelImg);
+  
+      // 滑入滑出：放大門、顯示圖片 label、顯示文字 label ===
+      doorEl.addEventListener('mouseenter', () => {
+        doorEl.setAttribute('scale', '0.4 0.4 0.4');
+        labelImg.setAttribute('visible', 'true');
+      });
+  
+      doorEl.addEventListener('mouseleave', () => {
+        doorEl.setAttribute('scale', '0.3 0.3 0.3');
+        labelImg.setAttribute('visible', 'false');
+      });
+  
+      // 點擊事件
+      doorEl.addEventListener('click', () => {
+        goToScene(door.targetPreset);
+      });
+  
+      doorContainer.appendChild(doorEl);
     });
-  }
+  }  
 
   // 返回default場景
   function buildReturnDoor() {
