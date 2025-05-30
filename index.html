@@ -12,7 +12,8 @@
 <body>
     <a-scene id="mainScene">
         <a-assets>
-            <a-asset-item id="img-door" src="image/door_with_frame.glb"></a-asset-item>
+            <a-asset-item id="img-door" src="image/interior_door_w_framing.glb"></a-asset-item>
+            <a-asset-item id="scene-forest" src="image/unreal_engine_4_sky.glb"></a-asset-item>
             <img id="info-bg" src="image/background@2x.png">
             <!-- 圖片資源 -->
             <img id="img-forest" src="image/360/sky.jpg" crossorigin="anonymous">
@@ -20,7 +21,7 @@
             <img id="img-greatwall" src="https://live.staticflickr.com/7883/47437761662_7c6afb01c9_5k.jpg" crossorigin="anonymous">
             <img id="img-petra" src="https://live.staticflickr.com/7833/47096473752_4a64a22d61_k.jpg" crossorigin="anonymous">
             <img id="img-christstatue" src="image/360/Cristo_Redentor.jpg" crossorigin="anonymous">
-            <img id="img-machupicchu" src="image/360/Machu_Picchu.jpg" crossorigin="anonymous">
+            <img id="img-machupicchu" src="image/360/Machu_Picchu_.jpg" crossorigin="anonymous">
             <img id="img-chichenitza" src="https://live.staticflickr.com/3083/2578304604_8753268597_b.jpg" crossorigin="anonymous">
             <img id="img-tajmahal" src="https://live.staticflickr.com/4565/24412196648_16f4590ab5_b.jpg" crossorigin="anonymous">
             <!-- 影片資源 -->
@@ -33,19 +34,17 @@
             <video id="vid-tajmahal" src="video/TAJ MAHAL (Agra, India)_ full tour.mp4" crossorigin="anonymous" playsinline></video>
         </a-assets>
         
-        <a-sky id="sky" src="#img-forest" rotation="0 -90 0"></a-sky>
+        <a-entity id="glb-scene" gltf-model="#scene-forest" position="0 0 0" scale="1 1 1" visible="true"></a-entity>
+        <a-sky id="sky" rotation="0 -90 0" visible="false"></a-sky>
         <a-entity id="doorContainer"></a-entity>
 
         <!-- 光源與地板 -->
-        <a-light type="ambient" color="#BBB"></a-light>
-        <a-plane rotation="-90 0 0" width="10" height="10" color="#CEF2C3"></a-plane>
+        <a-light type="ambient" color="#ffffff" intensity="0.5"></a-light>
+        <a-entity light="type: directional; color: #ffffff; intensity: 0.6" position="60 20 10"></a-entity>
 
         <!-- 相機與光標 -->
-        <a-entity camera look-controls>
-            <a-cursor fuse="false"
-                raycaster="objects: .clickable"
-                material="color: white; shader: flat">
-            </a-cursor>
+        <a-entity camera look-controls position="0 1.6 0">
+            <a-cursor fuse="false" raycaster="objects: .clickable"></a-cursor>
         </a-entity>
     </a-scene>
 

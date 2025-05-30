@@ -12,28 +12,35 @@ document.addEventListener('DOMContentLoaded', () => {
   async function goToScene(preset) {
     doorContainer.innerHTML = '';
     currentScene = preset;
-    const sky = document.querySelector('#sky'); 
+  
+    const sky = document.querySelector('#sky');
+    const glbScene = document.querySelector('#glb-scene');
+  
+    const res = await fetch('scenes.json');
+    const scenes = await res.json();
+    const sceneData = scenes.find(scene => scene.targetPreset === preset);
   
     if (preset === 'forest') {
-      sky.setAttribute('src', '#img-forest');
+      // 主場景：顯示 glb 模型，隱藏 sky
+      glbScene.setAttribute('visible', true);
+      sky.setAttribute('visible', false);
+      sky.removeAttribute('src');
+      sky.removeAttribute('gltf-model');
   
-      buildDoors();
-    } else {
-      const res = await fetch('scenes.json');
-      const scenes = await res.json();
-      const sceneData = scenes.find(scene => scene.targetPreset === preset);
+      buildDoors(); // 建立門
+    } else if (sceneData) {
+      // 子場景：顯示 360 圖片，隱藏 glb
+      glbScene.setAttribute('visible', false);
   
-      if (sceneData && sceneData.skyImg) {
+      if (sceneData.skyImg) {
         sky.setAttribute('src', sceneData.skyImg);
+        sky.setAttribute('visible', true);
       }
   
-      if (sceneData) {
-        buildSceneInfo(sceneData);   // 顯示標題／說明／影片
-      }
-  
-      buildReturnDoor(); // 顯示返回鍵
+      buildSceneInfo(sceneData); // 顯示標題/說明/影片
+      buildReturnDoor();         // 顯示返回鍵
     }
-  }
+  }  
 
   // 建立切換場景的門
   async function buildDoors() {
@@ -52,21 +59,21 @@ document.addEventListener('DOMContentLoaded', () => {
         doorEl.setAttribute('position', door.position);
         doorEl.setAttribute('rotation', door.rotation || '90 0 0');
         doorEl.setAttribute('scale', door.scale || '0.1 0.1 0.1');
-        doorEl.setAttribute('material', 'color: white; metalness: 0.3; roughness: 0.8');
+        doorEl.setAttribute('material', 'color: #888; roughness: 0.6; metalness: 0.1');
         doorEl.setAttribute('class', 'clickable');
 
-        // 光標移入 → 放大
+        // 光標移入 → 放大 + 發亮
         doorEl.setAttribute('event-set__enter', {
           _event: 'mouseenter',
-          scale: '0.12 0.12 0.12'
+          scale: '0.4 0.4 0.4'
         });
 
         // 光標離開 → 還原
         doorEl.setAttribute('event-set__leave', {
           _event: 'mouseleave',
-          scale: '0.1 0.1 0.1'
+          scale: '0.3 0.3 0.3'
         });
-  
+          
         doorEl.addEventListener('click', () => {
           goToScene(door.targetPreset);
         });
@@ -122,16 +129,16 @@ document.addEventListener('DOMContentLoaded', () => {
   
   function buildSceneInfo(sceneData) {
     const infoCard = document.createElement('a-entity');
-    infoCard.setAttribute('position', '-1.8 0.8 -3');
+    infoCard.setAttribute('position', '0 1.6 -5'); // 更遠、居中
   
     // 背景板
     const background = document.createElement('a-plane');
     background.setAttribute('src', '#info-bg');
-    background.setAttribute('width', 7.5);
-    background.setAttribute('height', 3);
-    background.setAttribute('position', '2 1.3 -0.01'); 
-    background.setAttribute('opacity', '0.5'); 
-    background.setAttribute('material', 'transparent: true'); 
+    background.setAttribute('width', 8);
+    background.setAttribute('height', 2.5);
+    background.setAttribute('position', '0 0.6 -0.01');
+    background.setAttribute('opacity', '0.4');
+    background.setAttribute('material', 'transparent: true');
     infoCard.appendChild(background);
   
     // 標題
@@ -139,33 +146,32 @@ document.addEventListener('DOMContentLoaded', () => {
     titleEl.setAttribute('value', sceneData.title || '');
     titleEl.setAttribute('color', 'white');
     titleEl.setAttribute('fontSize', '0.42');
-    titleEl.setAttribute('font', 'assets/fonts/NotoSansTC-Bold.ttf'); // 使用粗體版本
-    titleEl.setAttribute('maxWidth', '3');
+    titleEl.setAttribute('font', 'assets/fonts/NotoSansTC-Bold.ttf');
+    titleEl.setAttribute('maxWidth', '3.5');
     titleEl.setAttribute('align', 'center');
-    titleEl.setAttribute('position', '-0.4 2.1 0.01')
+    titleEl.setAttribute('position', '-1.8 1.2 0.01'); // 靠左但高一點
     infoCard.appendChild(titleEl);
-
   
     // 說明
     const descEl = document.createElement('a-troika-text');
     descEl.setAttribute('value', sceneData.description || '');
     descEl.setAttribute('color', '#fff');
-    descEl.setAttribute('fontSize', '0.1');
-    descEl.setAttribute('font', 'assets/fonts/NotoSansTC-Regular.ttf'); // 普通版本
-    descEl.setAttribute('maxWidth', '2.8');
+    descEl.setAttribute('fontSize', '0.11');
+    descEl.setAttribute('font', 'assets/fonts/NotoSansTC-Regular.ttf');
+    descEl.setAttribute('maxWidth', '3.2');
     descEl.setAttribute('lineHeight', '1.4');
     descEl.setAttribute('align', 'left');
     descEl.setAttribute('whiteSpace', 'normal');
     descEl.setAttribute('overflowWrap', 'break-word');
-    descEl.setAttribute('position', '0.4 1.2 0.01');
+    descEl.setAttribute('position', '-1.8 0.3 0.01');
     infoCard.appendChild(descEl);
   
     // 影片元件
     const videoEl = document.createElement('a-video');
-    videoEl.setAttribute('src', sceneData.video); // '#vid-colosseum'
-    videoEl.setAttribute('width', 2.5);
-    videoEl.setAttribute('height', 1.5);
-    videoEl.setAttribute('position', '4 1.2 0.01');
+    videoEl.setAttribute('src', sceneData.video);
+    videoEl.setAttribute('width', 3);
+    videoEl.setAttribute('height', 1.7);
+    videoEl.setAttribute('position', '2 0.6 0.01'); // 靠右但較下
     videoEl.setAttribute('autoplay', false);
     videoEl.setAttribute('muted', true);
     videoEl.setAttribute('loop', true);
@@ -179,7 +185,7 @@ document.addEventListener('DOMContentLoaded', () => {
     playBtn.setAttribute('radius', 0.35);
     playBtn.setAttribute('color', '#222');
     playBtn.setAttribute('opacity', '0.7');
-    playBtn.setAttribute('position', '4 1.2 0.02');
+    playBtn.setAttribute('position', '2 0.6 0.02');
     playBtn.setAttribute('class', 'clickable');
   
     const playText = document.createElement('a-text');
@@ -190,7 +196,6 @@ document.addEventListener('DOMContentLoaded', () => {
     playText.setAttribute('position', '0 0 0.01');
     playBtn.appendChild(playText);
   
-    // 點擊播放
     playBtn.addEventListener('click', () => {
       const nativeVideo = document.querySelector(sceneData.video);
       if (nativeVideo) {
@@ -205,7 +210,6 @@ document.addEventListener('DOMContentLoaded', () => {
     infoCard.appendChild(playBtn);
     doorContainer.appendChild(infoCard);
   
-    // 進入/離開影片播放控制
     setTimeout(() => {
       const nativeVideo = document.querySelector(sceneData.video);
       if (!nativeVideo) return;
